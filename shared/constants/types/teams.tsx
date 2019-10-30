@@ -124,6 +124,7 @@ export type TeamDetails = {
 export type State = Readonly<{
   addUserToTeamsState: AddUserToTeamsState
   addUserToTeamsResults: string
+  canPerform: Map<TeamID, TeamOperations>
   channelCreationError: string
   deletedTeams: Array<RPCTypes.DeletedTeamInfo>
   emailInviteError: EmailInviteError
@@ -148,7 +149,7 @@ export type State = Readonly<{
   teamNameToRetentionPolicy: I.Map<Teamname, RetentionPolicy>
   teamNameToRole: I.Map<Teamname, MaybeTeamRoleType>
   teamNameToSubteams: I.Map<Teamname, I.Set<Teamname>> // TODO remove
-  teamNameToCanPerform: I.Map<Teamname, TeamOperations>
+  teamNameToCanPerform: I.Map<Teamname, TeamOperations> // TODO remove
   teamNameToSettings: I.Map<Teamname, TeamSettings>
   teamNameToPublicitySettings: I.Map<Teamname, _PublicitySettings>
   teamNameToAllowPromote: I.Map<Teamname, boolean> // TODO remove
