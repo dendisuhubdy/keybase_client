@@ -765,13 +765,14 @@ const stopAudioRecording = async (
   if (!state.chat2.audioRecording) {
     return false
   }
-  if (action.payload.stopType === Types.AudioStopType.CANCEL) {
-    logger.info('stopAudioRecording: recording canceled, not sending')
-    return false
-  }
   const audio = state.chat2.audioRecording.get(conversationIDKey)
   if (!audio) {
     logger.info('stopAudioRecording: no audio record, not sending')
+    return false
+  }
+  if (action.payload.stopType === Types.AudioStopType.CANCEL) {
+    logger.info('stopAudioRecording: recording canceled, not sending')
+    await RPCChatTypes.localCancelUploadTempFileRpcPromise({outboxID: audio.outboxID})
     return false
   }
   if (ChatConstants.audioRecordingDuration(audio) < 500 || audio.path.length === 0) {
